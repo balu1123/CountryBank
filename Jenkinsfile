@@ -13,10 +13,11 @@ pipeline{
       }  
     }
 
-    stage("Unit testing"){
+    stage("OWASP Dependency Check"){
       steps{
-        sh 'mvn test'
-      }  
+        dependencyCheck additionalArguments: '', odcInstallation: 'DP'
+        dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+      }
     }
    }
 }
